@@ -1,0 +1,39 @@
+Árvore
+
+    -estrutura de dados hierárquica, que é projetaa para facilitar a busca
+    -formada por nós, que pode gerar vários filhos. a raíz é o nó do topo e é o ponto inicial da estrutura
+
+    -todo nó tem exatamente um pai, e um caminho pra chegar nele
+    -Folhas // nó terminal: nós sem filhos
+    -Sub-árvore: qualquer nó pode ser considerado uma raíz de uma sub-árvore
+
+    -os nós são organizados em níveis, que são contados a partir da raiz
+    -o nível é definido pela distância entre ele e a raiz
+    -a altura da árvore é dado pelo maior caminho de arestas até um nó
+
+
+Árvore Binária
+
+    -árvore que possui no máximo dois filhos
+
+Computacionalmente:
+
+    struct do nó:
+        informação;
+        ponteiro para o nó da ESQUERDA
+        ==        ==    ==    DIREITA
+
+    -temos um ponteiro apontando sempre pra raiz
+    -se não tem filho, aponta pra NULL
+
+    Percursos para visitar a árvore:
+        pré-ordem: começa pela raíz, depois a sub-árvore da esquerda depois a sub da DIREITA
+        em ordem: visite a sub-árvore da esquerda, então visite a raiz, depois a sub-arvore da DIREITA
+        pós-ordem: visite a sub-árvore à esquerda, dps a sup da direita, dps a raiz
+        por nível: doidera
+
+    
+Árvore Binária de Busca:
+
+    -cada nó possui uma chave, a qual todos os valores a esquerda do nó são menores que ele e os valores à direita, maiores
+    -mantêm os dados ordenados de forma dinâmica

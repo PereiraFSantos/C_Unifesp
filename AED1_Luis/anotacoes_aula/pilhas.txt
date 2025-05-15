@@ -1,0 +1,34 @@
+11/11/24
+
+Tipo abstrato de dados, o acesso aos elementos é sempre pelo topo
+
+    -são removidos na ordem inversa a que foram postos (ultimo que entra é o primeiro que sai)
+
+
+Operações:
+
+    -empilhar (push)
+    -desempilhar (pop)
+
+
+Aplicação:
+
+    Pilha estática:
+        -implementada com um vetor, em que o topo é o elemento na posição vet[n-1], para n elementos na pilha.
+        [struct com numero de elementos na pilha e um vetor pra pilha]
+
+        Inserir: recebe um ponteiro da pilha e um valor para inserir. Conferir se a pilha já esta cheia. Inserir no ultimo lugar da pilha e somar um na quantidade de elementos da pilha.
+
+        Remoção: verificar se a pilha está vazia, caso não, retirar o elemento do topo (bsucar no vetor vet[n-1], n sendo o numero de elementos atuais na lista).
+        
+
+
+    Pilhas Dinâmicas:
+        -Não se sabe o tamanho da pilha, sendo utilizaado uma lista encadeada, o qual a pilha é representada por um ptr para o primeiro nó. O topo da pilha será o primeiro elemento da lista. Inserções e remoções serão sempre do início da lista.
+
+
+
+
+Aplicação de Pilhas
+
+    calculadoras HP

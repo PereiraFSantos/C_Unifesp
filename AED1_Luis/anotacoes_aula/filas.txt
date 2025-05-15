@@ -1,0 +1,44 @@
+TAD
+
+    -inserção e remoção acontece em ordem de chegada.
+
+    Buffer: estrutura que é são posto elementos em fila.
+
+    -Operações básicas:
+        Insere: insere no fim da fila.
+        Remove: remove o elemento do início da fila.
+        Fila vazia/cheia: verifica se está cheia ou vazia.
+        Tamanho da fila: ...
+        Consulta (peek): consulta o elemento no início da fila
+
+
+Fila Estática:
+
+    -Se sabemos quantos elementos serão inseridos, com um vetor.
+    
+    Simples:
+        -vetor que guarda os elementos.
+        -variavel para guardar o índice do início e outro do fim da fila.
+        -verificar sempre se está vazia para remover ou cheia para inserir.
+        -quando a fila está cheia e algum elemento é removido, esse espaço é inutilizado.
+
+    Cicular:
+        -.. (mesmo que o anterior)
+        -..
+        -..
+        -mecanismo circular para reiniciar o vetor:
+            ex: i % MAX, com MAX = 5. Quando i = 5, o indice volta a ser 0.
+        -sempre que adiciona um elemento, a variavel que guarda o fim vai para o indice da frente, e vice e versa.
+
+
+Fila Dinâmica:
+
+    -fila pode ser implementada com uma lista encadeada, com um ponteiro para o início e outro para o fim da fila.
+
+    Inserção: ini e fim apontando para NULL inicialmente.
+        -ao adicionar o primeiro elemento, ambos apontam para esse unico elemento
+        -aos demais elementos, o novo nó aponta para NULL, o antigo ultimo nó aponta para o novo nó e o fim aponta para o novo nó.
+        
+    Remoção:
+        -ocorrem sempre do início.
+        -ini aponta para o 2 nó e o 1 é removido.

@@ -1,0 +1,111 @@
+Manipulação de arquivos em C
+
+Passando parâmetros para função main:
+
+    -feitos na linha de comando. EX: compilador (gcc aaa.c)
+        char *argv[] **matriz de strings
+
+    -quando eu executo um programa, eu invoco a função main do programa, e seus parâmetros separados por espaço
+
+    -os dois unicos possiveis argumentos para a main é:
+        int: que conta o numero de parâmetros separados por espaço quando se executa o programa
+        char: um array de strings, o qual vai armazenar as entradas do programa
+
+//------------------------------------------------//
+
+Arquivos:
+
+    -arquivo é uma representação organizada de dados em um dispositivo de armazenamento.
+        -Texto: mais legível porém menos eficiente em leitura e escrita, ocupa mais espaço
+        -Binário: ocupa menos espaço e mais eficiente em leitura e escrita
+
+    -Para manipular um arquivo, precisamos acessá-lo em seu local no armazenamento. Em C, esse acesso se dá por um ponteiro do tipo FILE (definido em <stdio.h>)
+
+    -O ponteiro permite localizar e interagir com o conteudo do arquivo, que atualiza a medida que os dados são lidos ou escritos no arquivo.
+
+    
+    -O acesso à memorias no disco é ineficiente comparado a RAM. C usa um buffer para contornar o problema.
+        -Buffer: em C, é uma área da memória RAM que armazena dados transferidos temporariamente, comum em operações E/S.
+        -buffers reduzem chamadas E/S ao agrupar dados, melhorando o desemenho.
+
+    
+
+Abrindo um Arquivo:
+
+    fopen: abre o arquivo especificado por filenameem um mode
+        -FILE *fopen(const char *filename, const char *mode)
+        mode: (isso para arquivos escritos, caso queiro para arquivo binário, adicionar um 'b' no final do mode)
+
+            r: abre um arquivo para leitura. o arquivo deve existir
+            w: cria um arquivo novo para escrita ou apaga o conteúdo existente, se o arquivo já existir
+            a: abre um arquivo para escrita no final. cria o arquivo se ele não existir
+            r+: abre um arquivo para leitura e escrita. o arquivo deve existir
+            w+: cria um arquivo novo para a leitura e escrita ou apaga o conteúdo existente
+            a+: abre um arquivo para leitura e escrita no final. cria o arquivo se não existir
+
+
+    fclose: fecha uum arquivo aberto por meio da fopen:
+        -int fclose(FILE *fp)
+        -> retorna 0 se o arquivo foi fechado corretamente e qualquer outro valor se ocorrer um erro
+        -> importante: sempre fechar o arquivo para garantir que o buffer seja gravado e os recursos do sistema liberados
+
+
+    fgetc: lê 1 caractere (1 byte) de um arquivo aberto no modo leitura por fopen
+        -> retorna um caracter lido ou E0F se o fim do arquivo for atingido
+
+    fputc: escreve 1 caractere de um arquivo aberto no modo escrita por fopen
+        -> retorna o caracter escrito ou E0F se a escrita não foi bem sucedida
+
+    fputs: escreve uma string no arquivo.
+        -int fputs(const char *str, FILE *fp)
+        ->retorna um inteiro se bem-sucedida ou E0F em caso de erro
+        ->não adiciona '\n' automaticamente
+
+    fgets: lê uma string até que um caractere de nova linha ('\n') seja lido ou lenght-1 caracteres sejam lidos
+        -char *fgets(char *str, int lenght, FILE *fp)
+        -> string é terminada com '\0'
+        -> retorna um ponteiro para str ou NULL em caso de erro 
+
+
+    fprintf e fscanf: funcionam como printf ou scanf mas para arquivos
+        -int fprintf(FILE *fp, const char *control_string,...)
+        -int fscanf(FILE *fp, const char *control_string,...)
+        -> retorna um int negativo em caso de erro
+
+    fwrite: escreve um bloco de memória em um arquivo aberto para escrita em binário(ex: "wb")
+        -size_t fwrite(const void *buffer, size_t num_bytes, size_t count, FILE *fp)
+
+        1.buffer: ptr para buffer onde os dados lidos serão armazenados
+        2.num_bytes: tamanho em byte de cada elemento a ser lido
+        3.count: número de elementos (blocos) a serem lidos
+        4.fp: ptr para o arquivo (aberto em modo de leitura)
+
+        -> retorna o número de bytes escrito (count) ou um número menor em caso de erro
+
+    fread: lê um bloco de dados binários de um arquivo aberto para leitura em binário
+        -size_t fread(void *buffer, size_t num_bytes, size_t count, FILE *fp)
+
+        1.buffer: ==
+        2.num_bytes: ==
+        3.count: ==
+        4.fp: ==
+
+    
+    rewind: reposiciona o indicador de posição no início do arquivo 
+        -void rewind(FILE *fp)
+
+    fseek: permite modificar o indicador de posição de forma aleatória
+        -int fseek(FILE *fp, long num_bytes, int origin)
+
+        1.fp: ptr para o arquivo
+        2.num_bytes: num de bytes a partir de origin que se tornará a nova posição corretamente
+        3.origin pode ser:
+            -
+
+    remove: apaga um arquivo especificado pelo seu nome
+        -void remove(char *file_name)
+        -> retorna 0 se bem sucedida ou um valor diferente caso não seja possivel apagar
+
+    fflush: força o conteúdo do buffer de saída a ser gravado no arquivo imediatamente
+        -int fflush(FILE *fp)
+        -> retorna 0 em caso de sucesso e E0F em caso de erro        
