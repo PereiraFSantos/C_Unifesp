@@ -10,6 +10,7 @@ typedef struct no {
 }No;
 
 No *encontra_no(No *lista, int id);
+void liberar(No *lista);
 
 // ---------------------------------------------------- //
 // funções de comando:
@@ -22,7 +23,7 @@ No *add(No *lista, int id, char *str) {
         printf("Codigo ja existente!\n");
         return lista;
     }
-
+    
     ptr = malloc(sizeof(No));
     ptr->codigo = id;
     ptr->descricao = str;
@@ -31,7 +32,7 @@ No *add(No *lista, int id, char *str) {
         lista = ptr;
         lista->ant = lista;
         lista->prox = lista;
-
+        
         return lista;
     }
 
@@ -39,7 +40,7 @@ No *add(No *lista, int id, char *str) {
     ptr->prox = lista;
     lista->ant->prox = ptr;
     lista->ant = ptr;
-
+    
     return lista;
 }
 
@@ -80,15 +81,15 @@ void printar(No *lista, int type) {
     if (type == 1) {
         ptr = ptr->ant;
         do {
-            printf("Codigo: %d - %s\n", ptr->codigo, ptr->descricao);
+            printf("Codigo: %d - %s", ptr->codigo, ptr->descricao);
             ptr = ptr->ant;
-        } while (ptr != lista);
+        } while (ptr != lista->ant);
 
         return;
     }
 
     do {
-        printf("Codigo: %d - %s\n", ptr->codigo, ptr->descricao);
+        printf("Codigo: %d - %s", ptr->codigo, ptr->descricao);
         ptr = ptr->prox;
     } while (ptr != lista);
 
@@ -103,7 +104,7 @@ void search(No *lista, int id) {
         return;
     }
 
-    printf("Codigo: %d - %s\n", ptr->codigo, ptr->descricao);
+    printf("Codigo: %d - %s", ptr->codigo, ptr->descricao);
 }
 
 // ---------------------------------------------------- //
@@ -122,7 +123,7 @@ No *encontra_no(No *lista, int id) {
 
     do {
         ptr = ptr->prox;
-    } while ((ptr != lista) || (ptr->codigo != id));
+    } while ((ptr != lista) && (ptr->codigo != id));
 
     if (lista == ptr)
         return NULL;
@@ -130,19 +131,43 @@ No *encontra_no(No *lista, int id) {
     return ptr;
 }
 
-void flush_buffer() {
+void flush_buffer(No *lista) {
     char a;
     do {
         a = getchar();
     } while ((a == ' ') || (a == '\n'));
 
     if (a == EOF) {
-        printf("N superior ao numero de comandos!");
-        // liberar memoria
+        printf("N superior ao numero de comandos!\n");
+        liberar(lista);
         exit(0);
     }
 
     ungetc(a, stdin);
+}
+
+void liberar(No *lista) {
+
+    if (!lista)
+        return;
+
+    No *ptr = lista->prox;
+    No *aux = lista->prox;
+
+    if (lista == lista->prox) {
+        free(lista->descricao);
+        free(lista);
+        return;
+    }
+
+    do {
+        aux = aux->prox;
+        free(ptr->descricao);
+        free(ptr);
+        ptr = aux;
+    } while (aux != lista);
+
+    free(lista);
 }
 
 void inputs(int entradas) {
@@ -153,18 +178,18 @@ void inputs(int entradas) {
 
     for (int i=0; i < entradas; i++) {
         
-        flush_buffer();
+        flush_buffer(lista);
         scanf("%s", comando);
 
         if (strcmp(comando, "ADD") == 0) {
 
             scanf("%d", &id);
             getchar();
-            fgets(str, 51, stdin);
-            lista = add(lista, id, str);
 
-            // printf("[1]\n");
-            // printf("%s\n", str);
+            str = malloc(sizeof(char) * 51);
+            fgets(str, 51, stdin);
+
+            lista = add(lista, id, str);
 
             continue;
         }
@@ -200,6 +225,7 @@ void inputs(int entradas) {
         }
     }
 
+    free(lista);
 }
 
 int main() {
@@ -208,7 +234,7 @@ int main() {
     scanf("%d", &n);
 
     if ((n < 1) || (n > 100)) {
-        printf("N nao e valido!");
+        printf("N nao e valido!\n");
         return 0;
     }
 
