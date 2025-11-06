@@ -1,0 +1,60 @@
+Fila de Prioridade
+
+    - TAD que mantém um conjunto de dados com propriedades associadas.
+    - Operações comuns:
+        - Inserção na Fila
+        - Atualização da Prioridade
+        - Remoção da Fila
+
+    - Da pra ser implementada com heap binária.
+
+    Tipo de fila de Prioridade:
+        Máxima: usa heap máxima e prioriza elementos com maior prioridade. *A prioridade de um elemento só pode ser aumentada!!
+
+        Mínima: usa heap mínima e prioriza elementos com menor prioridade. *a prioridade de um elemento só pode ser diminuida!!
+
+    - O array guarda referencias para objetos, cada objeto possui um campo chave, que indica a prioridade do objeto na posição i
+    - Usa o array auxiliar que guarda o lugar que o objeto está na heap, e o seu índice (array auxiliar) é guardado no objeto
+    
+///////////////////////////////////////////////////////////////////////////
+
+    HEAP-INCREASE-KEY(A, x, k)
+        if k < x.chave
+            error "nova chave é menor que a atual"
+        x.chave = k
+        encontre o index i em A onde x ocorre
+        while i > 1 and A[PARENT(i)] < A[i]
+            troca A[i] com A[PARENT(i)] e atualiza a informação que mapeia os objetos aos índices do array
+            i = PARENT(i)
+
+///////////////////////////////////////////////////////////////////////////
+
+Remoção um elemento com maior prioridade
+
+    HEAP-MAXIMUM(A)
+        if A.tamanho < 1
+            error "Heap vazia"
+        return A[1]
+
+    HEAP-EXTRACT-MAX(A)
+        max = HEAP-MAXIMUM(A)
+        A[1] = A[A.tamanho]
+        A.tamanho = A.tamanho-1
+        MAX-HEAPIFY(A,1)
+        return max
+
+///////////////////////////////////////////////////////////////////////////
+
+Inserir um novo elemento na fila
+
+    MAX-HEAP-INSERT(A, x, n)
+        if A.tamanho == n
+            error "Heap cheia"
+        A.tamanho = A.tamanho+1
+        k = x.chave
+        x.chave = -infinito
+        A[A.tamanho] = x
+        Associe x à posição A.tamanho do vetor a
+        MAX-HEAP-INCREASE-KEY(A,x,k)
+        
+///////////////////////////////////////////////////////////////////////////

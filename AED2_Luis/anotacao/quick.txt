@@ -1,0 +1,40 @@
+Quick Sort
+
+////////////////////////////////////////////////////////
+
+QUICKSORT(A, l, h)
+if l < h
+    p = PARTITION(A, l, h)
+    QUICKSORT(A, l, p-1)
+    QUICKSORT(A, p+1, h)
+
+////////////////////////////////////////////////////////
+
+exc: Escreva uma função em C que receba como parâmetros um array de inteiros e o seu tamanho. A função deve usar o último elemento do array como referência e:
+    1. Imprimir em sequência todos os elementos menores que a referência
+    2. Imprimir a referência
+    3. Em seguida, imprimir todos os elementos maiores que a referências;
+
+    deve ter complexidade Teta(n)
+
+////////////////////////////////////////////////////////
+
+PARTITION(A, l, h)
+p = A[h] //obtém o pivô
+
+i = l-1
+for j = l to h-1
+    if A[j] <= p
+        i = i+1
+        troque A[i] com A[j]
+
+troque A[i+1] com A[h]
+
+return (i+1)
+
+////////////////////////////////////////////////////////
+
+exc:
+    1. Implemente o Quick Sort em C
+    2. Mostre que o Quick Sort não é estável
+    3. Encontre a recorrência que representa o pior caso do Quick Sort

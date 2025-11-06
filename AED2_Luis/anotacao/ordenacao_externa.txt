@@ -1,0 +1,32 @@
+Ordenação Externa
+
+    - Ordenação para bases de dados maiores que o espaço disponível em RAM
+
+    Estratégia:
+        1. Quebre o arquivo em blocos do tamanho da memória disponível
+        2. Ordenar cada bloco na memória
+        3. Intercalar os blocos ordenados fazendo várias passadas (intercalações) sobre o arquivo.
+           Cada passada é criada blocos ordenados maiores.
+
+Intercalação Balanceada
+
+    1. Distribuição: quebrar em blocos ordenados (run), cada bloco é salvo em memória externa à medida que é gerado.
+    2. Intercalação: os runs são intercalados até que não reste nenhum run.
+
+Seleção por Substituição
+
+    - A ideia é produzir blocos ordenados (runs) maiores, mesmo que de tamanhos diferentes, e com isso diminuir o numero de passadas (intercalações).
+
+    - Para produzir esses blocos maiores, geralemnte uma heap mínima é usada como estrutura de dados auxiliar.
+
+    Estratégia:
+        1. Inicialização: carrega N itens na heap mínima
+        2. Produção: remova o menor elemento, grave-o na fita de saída e insira o proximo item de entrada
+        3. Novo Bloco: se o novo item for menor que o último gravado, ele pertence ao proximo run.
+           Marque-o como inativo (ou "maior possivel) para não interferir na ordem do run atual
+        4. Encerramento: Intercalação dos blocos.
+
+Intercalação Polifásica
+
+    - Reduz o número de fitas e intercalações usadas.
+

@@ -1,0 +1,32 @@
+Merge Sorte
+
+/////////////////////////////////////
+
+    l: id inicial
+    h: id final
+
+    if l >= h
+        return
+
+    m = (l+h)/2
+    MERGE-SORT(A,l,m)
+    MERGE-SORT(A,m+1,h)
+    Merge(A,l,m,h)
+
+/////////////////////////////////////
+
+Intercalação (merga) de partes ordenadas
+
+int *merge(int *array1, int tam1, int *array2, int tam2) {
+
+    int *ptr = malloc(sizeof(int) * (tam1 + tam2));
+
+}
+
+/////////////////////////////////////
+
+    exc:
+        1. Encontre a relação de recorrência da Busca Binária (recursiva) e resolva-a usando árvore de recorrência
+        2. Implemente o Merge Sort em C
+        3. Mostre o que o Merge Sorte é estável
+        4. Usando árvore de recorrência, mostre que no melhor caso a complexidade do Merge Sort é Teta(nlogn')

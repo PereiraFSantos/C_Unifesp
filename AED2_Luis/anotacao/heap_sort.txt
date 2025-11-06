@@ -1,0 +1,60 @@
+Heap Sort
+
+////////////////////////////////////////////////////////
+
+HEAPSORT(A, n)
+    BUILD-MAX-HEAP(A, n)
+    for i = n downto 2
+        troque A[1] com A[i]
+        A.tamanho = A.tamanho - 1
+        MAX-HEAPIFY(A, 1)
+
+////////////////////////////////////////////////////////
+
+Árvore Binária e sua representação em um Array
+
+Relações em um array para árvore Binária:
+
+    LEFT(i) // filho da esquerda de i
+        return 2*i
+
+    RIGHT(i) // filho da direita de i
+        return 2*i+1
+
+    PARENT(i) // pai de i
+        return i/2
+
+////////////////////////////////////////////////////////
+
+Heap Binária
+
+    - Heap Mínima: pai <= filho
+    - Heap Máxima: pai >= filho
+
+MAX-HEAPIFY
+    l = LEFT(i)
+    r = RIGHT(i)
+    if l <= A.tamanho and A[l] > A[i]
+        maior = l
+    else maior = i
+    if r <= A.tamanho and A[r] > A[maior]
+        maior = r
+    if maior != i
+        troque A[i] com A[maior]
+        MAX-HEAPIFY(A, maior)
+
+
+////////////////////////////////////////////////////////
+
+BUILD-MAX-HEAP
+
+    - constroi uma heap maxima pelos nós internos, tamanho/2
+
+    A.tamanho = n
+    for i = n/2 downto 1
+        MAX-HEAPIFY(A, i)
+
+////////////////////////////////////////////////////////
+
+    1. Implemente o Heap Sort em C
+    2. Mostre que o Heap Sort não é estavel

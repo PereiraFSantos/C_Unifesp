@@ -1,0 +1,127 @@
+Grafo
+
+    - estrutura matemática discreta que representa o relacionamento entre pares de entidades
+    - é representado por um par ordenado: G = (V, E)
+        - V: conjunto finito de vértices
+        - E: conjunto de arestas que conectam pares de vértices
+
+    - se dois vertices se conectam com uma aresta, ambos são vizinhos um do outro
+
+    Grafo Ponderado: quando possui uma função w: E -> |R que associa valores reais para cada aresta em em
+
+    Caminho: sequencia de vértices vizinhos e que não se repetem
+    Ciclo: caminho que é permitido repetir o primeiro e o último vértices
+
+    Grafo Completo: 
+        - quando os vértices são vizinhos de todo mundo
+
+    Grafo Conexo:
+        - quando existe um caminho que conecta todos os pares de vértices, para qualquer par de vértice (todos os vértices tão conectados num todo, não separados)
+
+    Árvore:
+        - grafo conexo que não tem ciclo
+
+    Dígrafo:
+        - G = (V,A), em que as arestas são pares ordenados, que possuem uma direção/orientação
+        - (u,v), dizemos que v é vizinho de saída de u, e u é vizinho de entrada de v
+
+///////////////////////////////////////////////////////////////////////////
+
+Representação em memória
+
+    Matriz de adjacencia: simétrica ou assimétrica (dígrafo ou não)
+    Lista de adjacencia: lista encadeada
+
+///////////////////////////////////////////////////////////////////////////
+
+Algorítmos de Busca em Grafos
+
+Busca em Largura:
+        
+        - faz uma busca por nível
+        - a saída é a distancia de arestas do elemento à fonte
+
+        - implementado por uma fila
+        - cada nó tem os seguintes atributos:
+            Cor:
+                Branco: não visitado
+                Cinza: visitado
+                Preto: visitado e fora da fila. Se o vértice é preto, os seus visinhos são necessariamente pretos ou cinzas
+            
+            Distancia: distância, contada em num de arestas, do nó fonte s até o nó t
+
+            Predecessor: vértice antecessor ao vértice t no caminho de s a t;
+
+/////////////////////////////////////////////
+algoritmo:
+
+BFS(G, s)
+    for each v in G.V
+        v.cor = Branco
+        v.pred = NULL 
+        v.dist = infinito
+
+    s.cor = cinza
+    s.dist = 0
+    Q.insere(s) //fila
+
+    while Q != vazio
+        u = Q.remove()
+        for each v in G.Adj[u]
+            if v.cor == Branco
+                v.cor = Cinza
+                v.dist = u.dist + 1
+                v.pred = u
+                Q.insere(v)
+        u.cor = Preto
+
+///////////////////////////////////////////////////////////////////////////
+
+Busca em Profundidade (DFS)
+
+    - método para percorrer um grafo/dígrafo indo mais profundamente possível ao longo de cada ramo antes de retroceder
+
+    - implementado com uma pilha
+
+    - cada nó possui os seguintes atributos:
+        Cor:
+            Branco: não visitado
+            Cinza: visitado pela 1º vez
+            Preto: lista de adjacencia toda explorada
+        
+        Tempo de descoberta (d): registra quando um vértice é descoberto pela primeira vez
+        Tempo de término (f): registra a busca termina de examinar a lista de adjacencia de um vértice
+        Predecessor
+
+
+/////////////////////////////////////////////
+algoritmo:
+
+DFS(G)
+    for each u in G.v
+        u.cor = Branco
+        u.pred = NULL
+
+    tempo = 0 // tempo é var global
+    for each u in G.V
+        if u.cor == Branco
+            DFS-Visit(G,u)
+
+DFS-Visit(G,u)
+    tempo = tempo + 1
+    u.d = tempo
+    u.cor = cinza
+
+    for each v in G.Adj[u]
+        if v.cor == Branco
+            v.pred = u
+            DFS-Visit(G,v)
+
+    u.cor = Preto
+    tempo = tempo + 1
+    u.f = tempo
+
+///////////////////////////////////////////////////////////////////////////
+
+Exc: 1.Implemente os algoritmos em largura e em profundidade em C
+    

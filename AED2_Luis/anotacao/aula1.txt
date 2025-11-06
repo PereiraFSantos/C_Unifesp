@@ -1,0 +1,64 @@
+Análise de Algoritmos
+
+    - estudar o desempenho do algoritmo considerando o TEMPO e ESPAÇO (memória).
+
+    - T(n) é uma função que expressa o numero de passos executados do algoritmo a partir de uma entrada n.
+
+    - Pegamos sempre o pior caso para comparação.
+
+    - Caso médio: tempo de execução esperado entre todas as entradas possíveis de tamanho n.
+
+Análise Assintótica
+
+    - Taxa de Crescimento: descreve como o tempo de execução aumenta com o tamanho da entrada, focando no termo dominante da função.
+
+    - Notação Assintótica: forma simbólica de representar a taxa de crescimento.
+
+    - Notação Big O: estebelece um limite superior. Indicando que ela não cresce mais rapido que uma certa taxa.
+
+    - == == = Big Ômega: estabelece um limite inferior para o crescimento assintótico da função. Indicando que ela cresce pelo menos mais rápido do que uma certa taxa. Definida pelo termo de maior ordem.
+
+    - == == = Big Theta: estabelece um limite justo (superior e inferior) para o crescimento assintótico de uma função, indicando que uma função cresce exatamente na taxa do termo de maior ordem. variando apenas por um fator constante um acima e um abaixo.
+
+Método de contagem de frequência e instruções
+
+    - O tempo é estimado atribuindo uma unidade de tempo a cada instrução simples executada.
+
+    - Instruções Simples: op. aritiméticas; atribuições; comparações; indexação de vetor.
+    - Instruções Compostas: como laços e chamadas de funções, analisamos em termos das intruções simples que elas executam.
+
+Algoritmos de Ordenação Quadrática
+
+    - Um algoritmo estável mantêm a ordem relativa de elementos iguais.
+    
+    Para ordenar:
+        - Vamos assumir que as chaves (elementos) estão num array.
+        - A ordenação será feita no mesmo array
+
+    1.Selection Sort
+    2.Bubble Sort
+    3.Insertion Sort
+
+    - O pior caso é Teta(n²) estando na ordem inversa, o melhor caso é os dados já estarem ordenados.
+
+    Selection Sort:
+        - Selecionar o menor elemento restante e colocá-lo na posição correta
+    
+    exc:
+        1.Implemente o Selection Sort em C para ordenar em ordem decrescente
+        2.Mostre que a versão vista do Selection Sort não é estável
+        3.Analise o Selection Sort em C no melhor e pior casos usando o método de contagem de frequência
+
+
+    Bubble Sort:
+        - Empurrar os maiores elementos para o final com trocas sucessivas de vizinhos.
+
+    exc:
+        1, 2 e 3 repete o do selection sort, só que pro bubblue.
+
+
+    Insertion Sort:
+        - Abrir um espaço no vetor para inserir o elemento, igual organizar um baralho.
+
+    exc:
+        repetir os exc.
