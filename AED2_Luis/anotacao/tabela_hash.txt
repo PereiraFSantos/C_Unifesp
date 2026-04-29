@@ -1,0 +1,27 @@
+Tabelas Hash
+
+    - estrutura dicionário: posso inserir, buscar e remover dessa estrutura.
+    - posso implementar um dicionário de várias formas
+
+    - pode ser implementada com uma tabela hash (acesso médio em O(1))
+
+Tabela de Endereço Direto
+
+    - um tipo de dicionário aplicável para chaves extraídas de U = {0, 1, ..., m-1} e m-1 é pequeno
+    - considera que não há dois elementos com a mesma chaves
+    - pode dar problema quando U for muito grande, e eu ter poucos elementos alocados
+
+Tabelas Hash
+
+    - No pior caso é Teta(n), no caso médio é O(1)
+    
+    - Uma tabela hash generaliza a ideia de um array, invés de usar a chave diretamente como índice, temos um array com um tamanho proporcional ao numero de elementos de chaves
+
+    - Passamos a chave em uma função para transformar o elemento em um índice. H(k), função H
+    - Pode haver colisões, que é mais de uma chave estar anexada ao mesmo indice no array
+
+Método do encadeamento
+
+..
+
+Endereçamento Aberto

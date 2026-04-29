@@ -1,0 +1,43 @@
+Pesquisa em Memória Externa: Árvores B
+
+    - cap 18 do Cormen, cap 5 Ziviani
+
+Árvore B
+
+    - É uma árvore que pode ter vários filhos e cada nó pode armazenar várias chaves, reduzindo a altura da árvore
+    - Os nós são chamados de páginas e correspondem a blocos do disco
+    - O crescimento se dá das folhas até a raiz
+    - A árvore é naturalmente balanceada
+
+    Propriedades: Árvore B de ordem m
+        1. a página raiz contém entre 1 e 2m chaves
+        2. As demais chaves tem no mínimo (m chaves e m+1 descendentes) e no máximo (2m chaves e 2m+1 descendentes)
+        3. Todas as páginas folhas aparecem no mesmo nível
+        4. As chaves em cada página aparecem em ordem crescente
+
+    Estrtura de um nó:
+    /////////////////////////////////////////////////////////////
+    #define M 3
+
+    struct Pagina{
+        int n;
+        int chaves[2 * M];
+        struct Pagina *filhos[2*M + 1];
+        int eh_folha;
+    }
+    /////////////////////////////////////////////////////////////
+
+    Busca: Para encontrar a chave x
+        1. Na página atual, compara o x com as chaves, até localizar a própria chave, ou o intervalo onde ela deveria estar 
+        2. Se não encontrou a chave, siga o ponteiro associado ao intervalo associado
+        3. Repita o processo até encontrar a chave (sucesso), ou chegar a um ponteiro nulo (sem sucesso)
+
+    Inserção:
+        1. Localizar o nó onde x deve ser inserido
+        2. Se a página tiver espaço, insira x na posição ordenada
+        3. Se a página estiver cheia, faça a divisão:
+            A. Considere todas as chaves da página mais x, ordenadas
+            B. A chave mediana é enviada para o pai
+            C. As chaves menores que a mediana ficam na página esquerda; as maiores, na página direita
+            D. x é inserida na página apropriada (esquerda, direita, ou pai) após a divisão
+        4. Se o pai estiver cheio ao receber a mediana, divida o pai também. Se necessário, propague esse processo até a raiz

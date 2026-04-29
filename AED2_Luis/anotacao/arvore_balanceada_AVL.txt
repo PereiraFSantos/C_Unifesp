@@ -1,0 +1,90 @@
+Árvore AVL
+
+    - É uma Árvore binária balanceada de busca, uma delas também é Árvore rubro negro
+    - o objetivo é garantir operações O(log n) independente da ordem de inserção
+
+    - altura da árvore é definido como a quantidade de arestas no maior caminho da raiz até uma de suas folhas
+    - altura de um nó v em uma árvore é definida por:
+        h(v) = max(hesq(v), hdir(v)) + 1
+
+    - fator de balanceamento de um ***nó*** v em uma ABB é:
+        fb(v) = hesq(v) - hdir(v)
+
+    
+    - Uma árvore AVL é uma ABB balanceada se o fator de balanceamento de qualquer nó é 0, 1 ou -1
+    - A manutenção da árvore será feita durante as inserções
+
+/////////////////////////////////////////////////////////////////////
+
+Rotações
+
+    - uma operação que aplicamos em um nó que tem um |fb(v)| = 2
+    - possui quatro tipos de rotações: LL e RR e LR e RL
+
+    Rotação LL: 
+        - a árvore pesa mais para a esquerda, e vai girar pra direita
+        - o nó X fica com fb +2 e seu filho esquerdo Y tem fb +1
+        //////////////////////////
+        LL(X)
+            Y = X->esq
+            X->esq = Y->dir
+            Y->dir = X
+            atualiza_fb(x)
+            atualiza_fb(y)
+            return Y
+        //////////////////////////
+
+    Rotação RR:
+        - simétrico à LL, árvore pendendo pra direita
+        //////////////////////////
+        RR(X)
+            Y = X->dir
+            X->dir = Y->esq
+            Y->esq = X
+            atualiza_fb(X)
+            atualiza_fb(Y)
+            return Y
+        //////////////////////////
+
+    Rotação LR: (Left-Right)
+        - uma rotação dupla, com o X +2 e Y -1
+        //////////////////////////
+        LR(X)
+            X->esq = RR(X->esq)
+            return LL(X)
+        //////////////////////////
+
+    Rotação RL:
+        - simétrico à LR, X -2 e seu filho esquerdo Y +1
+        //////////////////////////
+        RL(X)
+            X->dir = LL(X->dir)
+            return RR(X)
+        //////////////////////////
+
+/////////////////////////////////////////////////////////////////////
+
+Inserções em árvores AVL
+
+    - Mesma coisa de se inserir numa ABB
+    - quando estiver voltando da recursão, ir atualizando o fator de balanceamento
+
+/////////////////////////////////////////////////////////////////////
+
+Remoção em árvores AVL
+
+    - remova o nó como uma ABB
+
+    Rotação LL - caso especial:
+        - X +2 e seu filho esquerdo Y 0
+        - aplica LL
+
+    Rotação RR - caso especial
+        - X -2 e seu filho direito Y 0
+        - aplica RR
+
+/////////////////////////////////////////////////////////////////////
+
+EXC: 
+    1. Construa uma AVL inserindo, nesta ordem, as chaves 1,2,3,4,5,6,7,16 e 15
+    2. Remova as chaves 6, 5, 4, 2 e 1, nesta ordem, da AVL construída no exc1
